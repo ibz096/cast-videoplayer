@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>HTML VideoPlayer</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+
+	<div id="video-div">
+		<video width="400" controls>
+			<source src="res/mov_bbb.mp4" type="video/mp4">
+		</video>
+
+		<div id="mediaControl">
+			<button type="button" onclick="alert('Hello world!')">Play/Pause</button>
+			<button type="button" is="google-cast-button">Cast</button>
+		</div>
+
+	</div>
+
+	<script src="scripts/cast.js"></script>
+	
+	<script type="text/javascript">
+	    window['__onGCastApiAvailable'] = function(isAvailable) {
+	        if (isAvailable) {
+	            initializeCastApi();
+	        }
+	    };
+	</script>
+	
+	<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js">
+	</script>
+
+</body>
+</html>

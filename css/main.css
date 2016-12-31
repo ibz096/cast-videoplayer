@@ -1,0 +1,9 @@
+#video-div {
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+video {
+	width: 100%;
+	height: auto;
+}
