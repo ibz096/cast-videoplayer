@@ -11,10 +11,14 @@
 		<video width="400" controls>
 			<source src="res/mov_bbb.mp4" type="video/mp4">
 		</video>
+		
+		<form action="alert();";>
+  Video URL:<input type="text" id="videoURL" name="URL" value="">
+		</form> 
 
 		<div id="mediaControl">
-			<button type="button" onclick="play()">Play/Pause</button>
-			<button type="button" is="google-cast-button">Cast</button>
+			<button type="button" onclick="launch()">Launch</button>
+			<button id="cast-button" type="button" is="google-cast-button">Cast</button>
 		</div>
 
 	</div>

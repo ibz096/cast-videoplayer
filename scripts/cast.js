@@ -14,13 +14,29 @@ initializeCastApi = function() {
   });
 };
 
-//Retrieves current Cast session
-play = function() {
-	var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+//Initialize Remote Player
+initRemotePlayer = function () {
+	var player = new cast.framework.RemotePlayer();
+	var playerController = new cast.framework.RemotePlayerController(player);
+};
 
-	var mediaInfo = new chrome.cast.media.MediaInfo(currentMediaURL, contentType);
+//Retrieves current Cast session and plays currentMediaURL
+launch = function() {
+	var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+	var currentMediaURL2 = document.getElementById("videoURL").value;
+	var mediaInfo = new chrome.cast.media.MediaInfo(currentMediaURL2, contentType);
 	var request = new chrome.cast.media.LoadRequest(mediaInfo);
 	castSession.loadMedia(request).then(
 		function() { console.log('Load succeed'); },
 		function(errorCode) { console.log('Error code: ' + errorCode); });
+	
+	initRemotePlayer();
+};
+
+//Stop current Session
+stopCasting = function() {
+  var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+  // End the session and pass 'true' to indicate
+  // that receiver application should be stopped.
+  castSession.endSession(true);
 };
