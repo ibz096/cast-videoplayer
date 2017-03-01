@@ -9,6 +9,12 @@ video {
 }
 
 #cast-button {
-	width: 20px;
+	width: 200px;
 	height: 20px;
+}
+
+#mediaControl {
+	position: relative;
+    top: -63px;
+    width: 100%;
 }
