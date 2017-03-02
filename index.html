@@ -9,7 +9,6 @@
 
 	<div id="video-div">
 		<video width="400" poster="res/starwars.jpg">
-			<source src="res/mov_bbb.mp4" type="video/mp4">
 		</video>
 		
 		<form action="";>
@@ -17,26 +16,24 @@
 		</form> 
 
 		<div id="mediaControl">
-			<button type="button" onclick="launch()">Launch</button>
+			<button type="button" onclick="castPlayer.launch()">Launch</button>
 			<button id="cast-button" type="button" is="google-cast-button">Cast</button>
+			<button id="Play" type="button" onclick="castPlayer.remotePlayerController.playOrPause()"> Play/Pause </button>
 		</div>
 
 	</div>
 
 	<script src="scripts/cast.js"></script>
-	
 	<script type="text/javascript">
+		var castPlayer = new CastPlayer();
 	    window['__onGCastApiAvailable'] = function(isAvailable) {
 	        if (isAvailable) {
-	            initializeCastApi();
+	            castPlayer.initializeCastPlayer();
 	        }
 	    };
 
 	</script>
 	
-	<script type="text/javascript"
-        src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1">
-    </script>
-
+	<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
 </body>
 </html>
