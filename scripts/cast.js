@@ -1,36 +1,44 @@
-//Reciveer APP ID
-var applicationId = '1F0C48B4';
-//var applicationId = chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID;
+var CastPlayer = function() {
 
-//Media Variables
-var currentMediaURL = 'http://www.w3schools.com/html/mov_bbb.mp4';
-var contentType = 'video/mp4';
-
-//Initialize Cast API with Reciever Application
-initializeCastApi = function() {
-  cast.framework.CastContext.getInstance().setOptions({
-    receiverApplicationId: applicationId,
-    autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
-  });
+	//Media Variables
+	this.currentMediaURL = 'http://www.w3schools.com/html/mov_bbb.mp4';
+	this.contentType = 'video/mp4';
+	//Remote Player Variables
+	this.remotePlayer = null;
+	this.remotePlayerController = null;
 };
 
-//Initialize Remote Player
-initRemotePlayer = function () {
-	var player = new cast.framework.RemotePlayer();
-	var playerController = new cast.framework.RemotePlayerController(player);
+CastPlayer.prototype.initializeCastPlayer = function() {
+	//Reciveer APP ID
+	var applicationId = '1F0C48B4';
+
+	//Initialize Cast API with Reciever Application
+	  cast.framework.CastContext.getInstance().setOptions({
+	    receiverApplicationId: applicationId,
+	    autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+	  });
+
+	//Init Remote Player
+	this.remotePlayer = new cast.framework.RemotePlayer();
+	this.remotePlayerController = new cast.framework.RemotePlayerController(this.remotePlayer);
+
 };
 
 //Retrieves current Cast session and plays currentMediaURL
-launch = function() {
+CastPlayer.prototype.launch = function() {
 	var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-	var currentMediaURL2 = document.getElementById("videoURL").value;
-	var mediaInfo = new chrome.cast.media.MediaInfo(currentMediaURL2, contentType);
+	
+	if (document.getElementById("videoURL").value == ''){
+
+	} else {
+	this.currentMediaURL = document.getElementById("videoURL").value;
+	}
+	
+	var mediaInfo = new chrome.cast.media.MediaInfo(this.currentMediaURL, this.contentType);
 	var request = new chrome.cast.media.LoadRequest(mediaInfo);
 	castSession.loadMedia(request).then(
 		function() { console.log('Load succeed'); },
 		function(errorCode) { console.log('Error code: ' + errorCode); });
-	
-	initRemotePlayer();
 };
 
 //Stop current Session
